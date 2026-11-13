@@ -9,7 +9,9 @@
     body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: #f7f2ea; color: #2b2622; }
     header { padding: 2rem 1.5rem 1rem; text-align: center; }
     header img.logo { height: 150px; width: auto; }
-    header p.marca { margin: 0.25rem 0 0.5rem; font-family: Georgia, 'Times New Roman', serif; font-size: 1.1rem; letter-spacing: 0.08em; color: #632B50; }
+    header p.ubicacion { display: flex; align-items: center; justify-content: center; gap: 0.35rem; margin: 0 0 0.5rem; font-size: 0.9rem; color: #632B50; }
+    header p.ubicacion svg { width: 16px; height: 16px; }
+    header p.marca { margin: -0.6rem 0 0.1rem; font-family: Georgia, 'Times New Roman', serif; font-size: 1.1rem; letter-spacing: 0.08em; color: #632B50; }
     header h1 { margin: 0.5rem 0 0.25rem; font-size: 1.8rem; font-weight: 500; letter-spacing: 0.04em; }
     .barra { display: flex; justify-content: center; align-items: center; padding: 0 1.5rem 1.5rem; flex-wrap: wrap; gap: 1rem; }
     .barra input { width: min(420px, 100%); padding: 0.6rem 1rem; border: 1px solid #d6c9b6; border-radius: 999px; font-size: 1rem; background: #fff; }
@@ -26,14 +28,18 @@
     figcaption .precio { margin: 0; font-size: 1rem; color: #7a4e2d; font-weight: 600; }
     figcaption .nota { margin: 0.25rem 0 0; font-size: 0.82rem; color: #6b5e50; }
     .barra-filtro { padding-top: 0; }
+    .pegajoso { position: sticky; top: 0; z-index: 5; background: #f7f2ea; padding-top: 0.5rem; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+    .pegajoso .barra { padding-bottom: 0.5rem; }
+    .contacto a { text-decoration: underline; }
     .barra-filtro select { padding: 0.5rem 1rem; border: 1px solid #d6c9b6; border-radius: 999px; font-size: 0.95rem; background: #fff; color: #2b2622; }
     .contacto { display: flex; justify-content: center; gap: 1.25rem; flex-wrap: wrap; margin-top: 0.5rem; }
-    .contacto a { display: inline-flex; align-items: center; gap: 0.4rem; color: #632B50; text-decoration: none; font-size: 0.95rem; }
+    .contacto a { display: inline-flex; align-items: center; gap: 0.4rem; color: #632B50; text-decoration: underline; font-size: 0.95rem; }
     .contacto a:hover { text-decoration: underline; }
     .contacto svg { width: 20px; height: 20px; }
     .oculto { display: none; }
     .entrega { margin: 0.4rem 0 0; display: inline-block; font-size: 0.78rem; font-weight: 600; color: #2f6b3e; background: #e6f2e8; padding: 2px 8px; border-radius: 999px; }
     .dto-precio { margin: 0.1rem 0 0; font-size: 0.85rem; font-weight: 600; color: #a33; }
+    .cats-cliente { margin: 0.2rem 0 0; font-size: 0.78rem; color: #7a4e2d; }
     .visor { position: fixed; inset: 0; background: rgba(20, 16, 12, 0.85); display: none; align-items: center; justify-content: center; padding: 1rem; z-index: 10; }
     .visor.abierto { display: flex; }
     .visor-caja { position: relative; background: #f7f2ea; border-radius: 12px; padding: 1rem; width: min(92vw, 900px); display: flex; flex-direction: column; gap: 0.75rem; }
@@ -54,242 +60,285 @@
   <header>
     <img class="logo" src="Logo/logo_transparente.png" alt="Artesanías LuzBer">
     <p class="marca">Artesanías LuzBer</p>
+    <p class="ubicacion"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9" r="2.5" fill="currentColor"/></svg>La Calera - Cundinamarca</p>
     <h1>Catálogo de productos</h1>
     <div class="contacto">
       <a href="https://www.instagram.com/artesanias_luzber?obrf=OHo1YTA5YWVwYzJn" target="_blank" rel="noopener" class="ig"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>@artesanias_luzber</a>
       <a href="https://wa.me/573115641151" target="_blank" rel="noopener" class="wa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 8.5c0 3 2.5 6 6 6l1-1.5-2-1-1 1c-1-.5-2-1.5-2.5-2.5l1-1-1-2z" fill="currentColor"/></svg>+57 311 564 1151</a>
     </div>
   </header>
+  <div class="pegajoso">
   <div class="barra">
     <input type="search" id="buscar" placeholder="Buscar producto…" aria-label="Buscar productos">
     <span class="contador" id="contador"></span>
   </div>
   <div class="barra barra-filtro"><select id="categoria" aria-label="Filtrar por categor&iacute;a"><option value="">Todas las categor&iacute;as</option><option>Descuentos</option><option>Sets</option><option>Anillos</option><option>Aretes</option><option>Collares</option><option>Separador de libros</option><option>Esferos</option><option>Llaveros</option></select></div>
+  </div>
   <main id="catalogo">
     <figure class="card con-fotos" data-cat="Anillos" data-buscar="anillos $ 18.000">
       <div class="foto"><img src="fotos/lv_0_20260204072946.jpg" loading="lazy" alt="Anillos"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20260204072946.jpg" alt=""><img src="fotos/IMG_20260204_072530.jpg" alt=""><img src="fotos/IMG_20260129_073055.jpg" alt=""></div>
-      <figcaption><h3>Anillos</h3><p class="precio">$ 18.000</p><p class="nota">Ajustable, con flores</p></figcaption>
+      <figcaption><h3>Anillos</h3><p class="precio">$ 18.000</p><p class="nota">Ajustable, con flores</p><p class="cats-cliente">Anillos</p></figcaption>
     </figure>
-    <figure class="card con-fotos" data-cat="Aretes" data-buscar="aretes abutilon $ 25.000">
-      <div class="foto"><img src="fotos/lv_0_20251212163514.jpg" loading="lazy" alt="Aretes abutilon"></div>
+    <figure class="card con-fotos" data-cat="Aretes" data-buscar="aretes abutilon encapsulado $ 25.000">
+      <div class="foto"><img src="fotos/lv_0_20251212163514.jpg" loading="lazy" alt="Aretes abutilon encapsulado"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20251212163514.jpg" alt=""></div>
-      <figcaption><h3>Aretes abutilon</h3><p class="precio">$ 25.000</p><p class="nota">4x4 cm</p></figcaption>
+      <figcaption><h3>Aretes abutilon encapsulado</h3><p class="precio">$ 25.000</p><p class="nota">4x4 cm</p><p class="cats-cliente">Aretes</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="aretes flor hortencia $ 25.000">
       <div class="foto"><img src="fotos/IMG_20251107_170833.jpg" loading="lazy" alt="Aretes flor hortencia"></div>
       <div class="galeria" hidden><img src="fotos/IMG_20251107_170833.jpg" alt=""></div>
-      <figcaption><h3>Aretes flor hortencia</h3><p class="precio">$ 25.000</p><p class="nota">3x3 cm</p></figcaption>
+      <figcaption><h3>Aretes flor hortencia</h3><p class="precio">$ 25.000</p><p class="nota">3x3 cm</p><p class="cats-cliente">Aretes</p></figcaption>
+    </figure>
+    <figure class="card con-fotos" data-cat="Aretes" data-buscar="aretes helecho $ 25.000">
+      <div class="foto"><img src="fotos/aretes_helecho_1.jpg" loading="lazy" alt="Aretes Helecho"></div>
+      <div class="galeria" hidden><img src="fotos/aretes_helecho_1.jpg" alt=""></div>
+      <figcaption><h3>Aretes Helecho</h3><p class="precio">$ 25.000</p><p class="nota">4x2 cm</p><p class="cats-cliente">Aretes</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="aretes hoja $ 18.000">
       <div class="foto"><img src="fotos/2025110718070959.jpg" loading="lazy" alt="Aretes hoja"></div>
       <div class="galeria" hidden><img src="fotos/2025110718070959.jpg" alt=""><img src="fotos/2025110718075988.jpg" alt=""><img src="fotos/2025110718112238.jpg" alt=""><img src="fotos/lv_0_20251126133323.jpg" alt=""><img src="fotos/lv_0_20251126133538.jpg" alt=""><img src="fotos/lv_0_20251126133712.jpg" alt=""></div>
-      <figcaption><h3>Aretes hoja</h3><p class="precio">$ 18.000</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Aretes hoja</h3><p class="precio">$ 18.000</p><p class="cats-cliente">Aretes</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="aretes mini orquídea $ 50.000">
       <div class="foto"><img src="fotos/aretes_mini_orquidea.jpg" loading="lazy" alt="Aretes mini orquídea"></div>
       <div class="galeria" hidden><img src="fotos/aretes_mini_orquidea.jpg" alt=""><img src="fotos/orquidea_1_-_aretes_mini_orquidea.jpg" alt=""></div>
-      <figcaption><h3>Aretes mini orquídea</h3><p class="precio">$ 50.000</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Aretes mini orquídea</h3><p class="precio">$ 50.000</p><p class="cats-cliente">Aretes</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="aretes pensamientos $ 25.000">
       <div class="foto"><img src="fotos/2025110717302859.jpg" loading="lazy" alt="Aretes pensamientos"></div>
       <div class="galeria" hidden><img src="fotos/2025110717302859.jpg" alt=""><img src="fotos/IMG_20251107_171834.jpg" alt=""></div>
-      <figcaption><h3>Aretes pensamientos</h3><p class="precio">$ 25.000</p></figcaption>
+      <figcaption><h3>Aretes pensamientos</h3><p class="precio">$ 25.000</p><p class="cats-cliente">Aretes</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="aretes pétalo de rosa $ 12.000">
       <div class="foto"><img src="fotos/lv_0_20251126133840.jpg" loading="lazy" alt="Aretes pétalo de rosa"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20251126133840.jpg" alt=""></div>
-      <figcaption><h3>Aretes pétalo de rosa</h3><p class="precio">$ 12.000</p><p class="nota">2.5x2 cm</p></figcaption>
+      <figcaption><h3>Aretes pétalo de rosa</h3><p class="precio">$ 12.000</p><p class="nota">2.5x2 cm</p><p class="cats-cliente">Aretes</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="aretes pétalos gladiola $ 20.000">
       <div class="foto"><img src="fotos/IMG_20251107_192808.jpg" loading="lazy" alt="Aretes pétalos gladiola"></div>
-      <div class="galeria" hidden><img src="fotos/IMG_20251107_192808.jpg" alt=""><img src="fotos/2025110718031819.jpg" alt=""></div>
-      <figcaption><h3>Aretes pétalos gladiola</h3><p class="precio">$ 20.000</p><p class="nota">4x3 cm</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <div class="galeria" hidden><img src="fotos/IMG_20251107_192808.jpg" alt=""><img src="fotos/lv_0_20251126133949.jpg" alt=""></div>
+      <figcaption><h3>Aretes pétalos gladiola</h3><p class="precio">$ 20.000</p><p class="nota">4x3 cm</p><p class="cats-cliente">Aretes</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="aretes rosas $ 35.000">
       <div class="foto"><img src="fotos/IMG_20260110_161628.jpg" loading="lazy" alt="Aretes Rosas"></div>
       <div class="galeria" hidden><img src="fotos/IMG_20260110_161628.jpg" alt=""><img src="fotos/IMG_20260110_161636.jpg" alt=""><img src="fotos/IMG_20260110_161640.jpg" alt=""><img src="fotos/lv_0_20260122115346.jpg" alt=""></div>
-      <figcaption><h3>Aretes Rosas</h3><p class="precio">$ 35.000</p></figcaption>
+      <figcaption><h3>Aretes Rosas</h3><p class="precio">$ 35.000</p><p class="cats-cliente">Aretes</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="aretes silvestre morados $ 25.000">
       <div class="foto"><img src="fotos/lv_0_20251212162504.jpg" loading="lazy" alt="Aretes silvestre morados"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20251212162504.jpg" alt=""><img src="fotos/lv_0_20251212162527.jpg" alt=""></div>
-      <figcaption><h3>Aretes silvestre morados</h3><p class="precio">$ 25.000</p><p class="nota">4x4 cm</p></figcaption>
+      <figcaption><h3>Aretes silvestre morados</h3><p class="precio">$ 25.000</p><p class="nota">4x4 cm</p><p class="cats-cliente">Aretes</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="aretes lavanda $ 25.000">
       <div class="foto"><img src="fotos/lv_0_20251212161825.jpg" loading="lazy" alt="Aretes lavanda"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20251212161825.jpg" alt=""><img src="fotos/lv_0_20251212161836.jpg" alt=""></div>
-      <figcaption><h3>Aretes lavanda</h3><p class="precio">$ 25.000</p></figcaption>
+      <figcaption><h3>Aretes lavanda</h3><p class="precio">$ 25.000</p><p class="cats-cliente">Aretes</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Collares" data-buscar="bailarina precio por definir">
       <div class="foto"><img src="fotos/bailarina.jpg" loading="lazy" alt="Bailarina"></div>
       <div class="galeria" hidden><img src="fotos/bailarina.jpg" alt=""><img src="fotos/bailarina_-_pensamientos.jpg" alt=""></div>
-      <figcaption><h3>Bailarina</h3><p class="precio">Precio por definir</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Bailarina</h3><p class="precio">Precio por definir</p><p class="cats-cliente">Collares</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Collares|Llaveros" data-buscar="colgante gato $ 20.000">
       <div class="foto"><img src="fotos/IMG_20251105_095821.jpg" loading="lazy" alt="Colgante gato"></div>
       <div class="galeria" hidden><img src="fotos/IMG_20251105_095821.jpg" alt=""><img src="fotos/IMG_20251105_095853.jpg" alt=""></div>
-      <figcaption><h3>Colgante gato</h3><p class="precio">$ 20.000</p><p class="nota">6x4 cm</p></figcaption>
+      <figcaption><h3>Colgante gato</h3><p class="precio">$ 20.000</p><p class="nota">6x4 cm</p><p class="cats-cliente">Collares, Llaveros</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Collares|Llaveros" data-buscar="colgante gato cazando $ 20.000">
       <div class="foto"><img src="fotos/IMG_20251106_064506.jpg" loading="lazy" alt="Colgante gato cazando"></div>
       <div class="galeria" hidden><img src="fotos/IMG_20251106_064506.jpg" alt=""><img src="fotos/IMG_20251106_064516.jpg" alt=""></div>
-      <figcaption><h3>Colgante gato cazando</h3><p class="precio">$ 20.000</p><p class="nota">6x3 cm</p></figcaption>
+      <figcaption><h3>Colgante gato cazando</h3><p class="precio">$ 20.000</p><p class="nota">6x3 cm</p><p class="cats-cliente">Collares, Llaveros</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Collares|Llaveros" data-buscar="colgante gato sentado $ 20.000">
       <div class="foto"><img src="fotos/IMG_20251105_095748.jpg" loading="lazy" alt="Colgante gato sentado"></div>
       <div class="galeria" hidden><img src="fotos/IMG_20251105_095748.jpg" alt=""></div>
-      <figcaption><h3>Colgante gato sentado</h3><p class="precio">$ 20.000</p><p class="nota">6x3 cm</p></figcaption>
+      <figcaption><h3>Colgante gato sentado</h3><p class="precio">$ 20.000</p><p class="nota">6x3 cm</p><p class="cats-cliente">Collares, Llaveros</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="colgante pétalos $ 25.000">
       <div class="foto"><img src="fotos/2025110717223536.jpg" loading="lazy" alt="Colgante pétalos"></div>
       <div class="galeria" hidden><img src="fotos/2025110717223536.jpg" alt=""><img src="fotos/IMG_20251107_171909.jpg" alt=""><img src="fotos/IMG_20251107_171909_1.jpg" alt=""></div>
-      <figcaption><h3>Colgante pétalos</h3><p class="precio">$ 25.000</p><p class="nota">Unidad $ 25.000 · pareja $ 40.000</p></figcaption>
+      <figcaption><h3>Colgante pétalos</h3><p class="precio">$ 25.000</p><p class="nota">Unidad $ 25.000 · pareja $ 40.000</p><p class="cats-cliente">Aretes</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes|Collares|Llaveros" data-buscar="colgante serpiente lavanda $ 25.000">
       <div class="foto"><img src="fotos/IMG_20260121_123705.jpg" loading="lazy" alt="Colgante serpiente lavanda"></div>
       <div class="galeria" hidden><img src="fotos/IMG_20260121_123705.jpg" alt=""><img src="fotos/IMG_20260121_123722.jpg" alt=""></div>
-      <figcaption><h3>Colgante serpiente lavanda</h3><p class="precio">$ 25.000</p><p class="nota">6x3 cm</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Colgante serpiente lavanda</h3><p class="precio">$ 25.000</p><p class="nota">6x3 cm</p><p class="cats-cliente">Aretes, Collares, Llaveros</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Descuentos|Collares|Llaveros" data-buscar="collar letra (cualquier letra) $ 25.000">
       <div class="foto"><img src="fotos/IMG_20251105_100019.jpg" loading="lazy" alt="Collar Letra (cualquier letra)"></div>
-      <div class="galeria" hidden><img src="fotos/IMG_20251105_100019.jpg" alt=""><img src="fotos/IMG_20251105_100024.jpg" alt=""><img src="fotos/IMG_20251105_100028.jpg" alt=""><img src="fotos/IMG_20251105_100033.jpg" alt=""><img src="fotos/IMG_20251105_100038.jpg" alt=""><img src="fotos/IMG_20251105_100043.jpg" alt=""><img src="fotos/IMG_20251105_100050.jpg" alt=""><img src="fotos/IMG_20251105_100054.jpg" alt=""><img src="fotos/IMG_20251105_100059.jpg" alt=""><img src="fotos/IMG_20251105_100108.jpg" alt=""><img src="fotos/IMG_20251105_100113.jpg" alt=""><img src="fotos/IMG_20251105_100119.jpg" alt=""><img src="fotos/IMG_20251105_100124.jpg" alt=""><img src="fotos/IMG_20251105_100128.jpg" alt=""><img src="fotos/IMG_20251105_100135.jpg" alt=""></div>
-      <figcaption><h3>Collar Letra (cualquier letra)</h3><p class="precio">$ 25.000</p><p class="nota">4.5x3 cm, escoge la letra</p><p class="dto-precio">Oferta: $ 20.000 (-20%)</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <div class="galeria" hidden><img src="fotos/IMG_20251105_100019.jpg" alt=""><img src="fotos/IMG_20251105_100024.jpg" alt=""><img src="fotos/IMG_20251105_100028.jpg" alt=""><img src="fotos/IMG_20251105_100033.jpg" alt=""><img src="fotos/IMG_20251105_100038.jpg" alt=""><img src="fotos/IMG_20251105_100043.jpg" alt=""><img src="fotos/IMG_20251105_100050.jpg" alt=""><img src="fotos/IMG_20251105_100054.jpg" alt=""><img src="fotos/IMG_20251105_100059.jpg" alt=""><img src="fotos/IMG_20251105_100108.jpg" alt=""><img src="fotos/IMG_20251105_100113.jpg" alt=""><img src="fotos/IMG_20251105_100119.jpg" alt=""><img src="fotos/IMG_20251105_100124.jpg" alt=""><img src="fotos/IMG_20251105_100128.jpg" alt=""><img src="fotos/IMG_20251105_100135.jpg" alt=""><img src="fotos/20.jpg" alt=""></div>
+      <figcaption><h3>Collar Letra (cualquier letra)</h3><p class="precio">$ 25.000</p><p class="nota">4.5x3 cm, escoge la letra</p><p class="dto-precio">Oferta: $ 20.000 (-20%)</p><p class="cats-cliente">Descuentos, Collares, Llaveros</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Collares" data-buscar="collar orquídea $ 70.000">
       <div class="foto"><img src="fotos/IMG_20260110_162201.jpg" loading="lazy" alt="Collar orquídea"></div>
       <div class="galeria" hidden><img src="fotos/IMG_20260110_162201.jpg" alt=""><img src="fotos/IMG_20260110_162207.jpg" alt=""></div>
-      <figcaption><h3>Collar orquídea</h3><p class="precio">$ 70.000</p><p class="nota">5x4 cm</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Collar orquídea</h3><p class="precio">$ 70.000</p><p class="nota">5x4 cm</p><p class="cats-cliente">Collares</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="complemento margarita $ 30.000">
       <div class="foto"><img src="fotos/lv_0_20251212163108.jpg" loading="lazy" alt="Complemento margarita"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20251212163108.jpg" alt=""><img src="fotos/lv_0_20251212163148.jpg" alt=""><img src="fotos/lv_0_20251212163049.jpg" alt=""></div>
-      <figcaption><h3>Complemento margarita</h3><p class="precio">$ 30.000</p><p class="nota">4x3 cm</p></figcaption>
+      <figcaption><h3>Complemento margarita</h3><p class="precio">$ 30.000</p><p class="nota">4x3 cm</p><p class="cats-cliente">Aretes</p></figcaption>
+    </figure>
+    <figure class="card con-fotos" data-cat="Collares" data-buscar="cruz $ 25.000">
+      <div class="foto"><img src="fotos/cruz_1.jpg" loading="lazy" alt="Cruz"></div>
+      <div class="galeria" hidden><img src="fotos/cruz_1.jpg" alt=""><img src="fotos/cruz_2.jpg" alt=""><img src="fotos/cruz_3.jpg" alt=""><img src="fotos/cruz.jpg" alt=""></div>
+      <figcaption><h3>Cruz</h3><p class="precio">$ 25.000</p><p class="nota">7x5 cm</p><p class="cats-cliente">Collares</p></figcaption>
+    </figure>
+    <figure class="card con-fotos" data-cat="Collares" data-buscar="cruz lavanda $ 20.000">
+      <div class="foto"><img src="fotos/cruz_dientedeleon_1.jpg" loading="lazy" alt="Cruz lavanda"></div>
+      <div class="galeria" hidden><img src="fotos/cruz_dientedeleon_1.jpg" alt=""><img src="fotos/cruz_dientedeleon_2.jpg" alt=""><img src="fotos/cruz.jpg" alt=""></div>
+      <figcaption><h3>Cruz lavanda</h3><p class="precio">$ 20.000</p><p class="nota">6.5x4 cm</p><p class="cats-cliente">Collares</p></figcaption>
+    </figure>
+    <figure class="card con-fotos" data-cat="Collares" data-buscar="cruz rosa $ 20.000">
+      <div class="foto"><img src="fotos/cruz_rosa_1.jpg" loading="lazy" alt="Cruz rosa"></div>
+      <div class="galeria" hidden><img src="fotos/cruz_rosa_1.jpg" alt=""><img src="fotos/cruz_rosa_2.jpg" alt=""><img src="fotos/cruz_rosa_3.jpg" alt=""><img src="fotos/cruz.jpg" alt=""></div>
+      <figcaption><h3>Cruz rosa</h3><p class="precio">$ 20.000</p><p class="nota">6.5x4 cm</p><p class="cats-cliente">Collares</p></figcaption>
+    </figure>
+    <figure class="card con-fotos" data-cat="Collares" data-buscar="cruz rosa 2 $ 20.000">
+      <div class="foto"><img src="fotos/cruz_rosa2_1.jpg" loading="lazy" alt="Cruz rosa 2"></div>
+      <div class="galeria" hidden><img src="fotos/cruz_rosa2_1.jpg" alt=""><img src="fotos/cruz_rosa2_2.jpg" alt=""><img src="fotos/cruz.jpg" alt=""></div>
+      <figcaption><h3>Cruz rosa 2</h3><p class="precio">$ 20.000</p><p class="nota">7x3 cm</p><p class="cats-cliente">Collares</p></figcaption>
+    </figure>
+    <figure class="card con-fotos" data-cat="" data-buscar="cuadro colibrí en fieltro $ 120.000">
+      <div class="foto"><img src="fotos/28.jpg" loading="lazy" alt="Cuadro colibrí en fieltro"></div>
+      <div class="galeria" hidden><img src="fotos/28.jpg" alt=""></div>
+      <figcaption><h3>Cuadro colibrí en fieltro</h3><p class="precio">$ 120.000</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Esferos" data-buscar="esfero negro/azul/rojo $ 20.000">
       <div class="foto"><img src="fotos/esfero.jpg" loading="lazy" alt="Esfero Negro/Azul/Rojo"></div>
       <div class="galeria" hidden><img src="fotos/esfero.jpg" alt=""><img src="fotos/separador_2_-_esfero.jpg" alt=""></div>
-      <figcaption><h3>Esfero Negro/Azul/Rojo</h3><p class="precio">$ 20.000</p><p class="nota">Resina con flores (antes $ 25.000)</p></figcaption>
+      <figcaption><h3>Esfero Negro/Azul/Rojo</h3><p class="precio">$ 20.000</p><p class="nota">Resina con flores (antes $ 25.000)</p><p class="cats-cliente">Esferos</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Sets|Collares" data-buscar="collar orquídea $ 80.000">
       <div class="foto"><img src="fotos/orquidea.jpg" loading="lazy" alt="Collar Orquídea"></div>
       <div class="galeria" hidden><img src="fotos/orquidea.jpg" alt=""><img src="fotos/orquidea_2.jpg" alt=""><img src="fotos/orquidea_-_pensamientos.jpg" alt=""><img src="fotos/orquidea_1_-_aretes_mini_orquidea.jpg" alt=""></div>
-      <figcaption><h3>Collar Orquídea</h3><p class="precio">$ 80.000</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Collar Orquídea</h3><p class="precio">$ 80.000</p><p class="cats-cliente">Sets, Collares</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="pensamientos precio por definir">
       <div class="foto"><img src="fotos/lv_0_20261105165419.jpg" loading="lazy" alt="Pensamientos"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20261105165419.jpg" alt=""><img src="fotos/bailarina_-_pensamientos.jpg" alt=""><img src="fotos/orquidea_-_pensamientos.jpg" alt=""></div>
-      <figcaption><h3>Pensamientos</h3><p class="precio">Precio por definir</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Pensamientos</h3><p class="precio">Precio por definir</p><p class="cats-cliente">Aretes</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Sets|Collares" data-buscar="collar polilla $ 35.000">
       <div class="foto"><img src="fotos/pololla_2.jpg" loading="lazy" alt="Collar Polilla"></div>
       <div class="galeria" hidden><img src="fotos/pololla_2.jpg" alt=""><img src="fotos/polilla_1.png" alt=""></div>
-      <figcaption><h3>Collar Polilla</h3><p class="precio">$ 35.000</p></figcaption>
+      <figcaption><h3>Collar Polilla</h3><p class="precio">$ 35.000</p><p class="cats-cliente">Sets, Collares</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="rectángulo lavanda $ 20.000">
       <div class="foto"><img src="fotos/lv_0_20251212162024.jpg" loading="lazy" alt="Rectángulo lavanda"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20251212162024.jpg" alt=""><img src="fotos/lv_0_20251212162114.jpg" alt=""></div>
-      <figcaption><h3>Rectángulo lavanda</h3><p class="precio">$ 20.000</p><p class="nota">4x1 cm</p></figcaption>
+      <figcaption><h3>Rectángulo lavanda</h3><p class="precio">$ 20.000</p><p class="nota">4x1 cm</p><p class="cats-cliente">Aretes</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Separador de libros" data-buscar="separador libro $ 25.000">
       <div class="foto"><img src="fotos/separador.jpg" loading="lazy" alt="Separador libro"></div>
       <div class="galeria" hidden><img src="fotos/separador.jpg" alt=""><img src="fotos/separador_2_-_esfero.jpg" alt=""><img src="fotos/separador_3.jpg" alt=""></div>
-      <figcaption><h3>Separador libro</h3><p class="precio">$ 25.000</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Separador libro</h3><p class="precio">$ 25.000</p><p class="cats-cliente">Separador de libros</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Collares" data-buscar="collar orquideas $ 70.000">
       <div class="foto"><img src="fotos/lv_0_20251125035951.jpg" loading="lazy" alt="Collar orquideas"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20251125035951.jpg" alt=""><img src="fotos/lv_0_20251125040349.jpg" alt=""></div>
-      <figcaption><h3>Collar orquideas</h3><p class="precio">$ 70.000</p></figcaption>
+      <figcaption><h3>Collar orquideas</h3><p class="precio">$ 70.000</p><p class="cats-cliente">Collares</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Sets|Aretes|Collares" data-buscar="set orquídeas 2 $ 120.000">
       <div class="foto"><img src="fotos/lv_0_20251125040055.jpg" loading="lazy" alt="Set orquídeas 2"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20251125040055.jpg" alt=""></div>
-      <figcaption><h3>Set orquídeas 2</h3><p class="precio">$ 120.000</p></figcaption>
+      <figcaption><h3>Set orquídeas 2</h3><p class="precio">$ 120.000</p><p class="cats-cliente">Sets, Aretes, Collares</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Sets|Aretes|Collares" data-buscar="set orquídeas 3 $ 85.000">
       <div class="foto"><img src="fotos/IMG_20251201_184144.jpg" loading="lazy" alt="Set orquídeas 3"></div>
-      <div class="galeria" hidden><img src="fotos/IMG_20251201_184144.jpg" alt=""><img src="fotos/IMG_20251201_184147.jpg" alt=""><img src="fotos/IMG_20251201_184151.jpg" alt=""><img src="fotos/lv_0_20251201184234.jpg" alt=""><img src="fotos/lv_0_20251201184311.jpg" alt=""><img src="fotos/lv_0_20251201184337.jpg" alt=""></div>
-      <figcaption><h3>Set orquídeas 3</h3><p class="precio">$ 85.000</p><p class="nota">Set único de orquídeas</p></figcaption>
+      <div class="galeria" hidden><img src="fotos/IMG_20251201_184144.jpg" alt=""><img src="fotos/IMG_20251201_184147.jpg" alt=""><img src="fotos/IMG_20251201_184151.jpg" alt=""><img src="fotos/lv_0_20251201184234.jpg" alt=""><img src="fotos/lv_0_20251201184311.jpg" alt=""><img src="fotos/lv_0_20251201184337.jpg" alt=""><img src="fotos/39.jpg" alt=""></div>
+      <figcaption><h3>Set orquídeas 3</h3><p class="precio">$ 85.000</p><p class="nota">Set único de orquídeas</p><p class="cats-cliente">Sets, Aretes, Collares</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Collares" data-buscar="collar grande orquidea $ 80.000">
       <div class="foto"><img src="fotos/lv_0_20261105122751.jpg" loading="lazy" alt="Collar grande Orquidea"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20261105122751.jpg" alt=""></div>
-      <figcaption><h3>Collar grande Orquidea</h3><p class="precio">$ 80.000</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Collar grande Orquidea</h3><p class="precio">$ 80.000</p><p class="cats-cliente">Collares</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Collares" data-buscar="collar orquidea 3 $ 80.000">
       <div class="foto"><img src="fotos/lv_0_20261105165227.jpg" loading="lazy" alt="Collar Orquidea 3"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20261105165227.jpg" alt=""></div>
-      <figcaption><h3>Collar Orquidea 3</h3><p class="precio">$ 80.000</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Collar Orquidea 3</h3><p class="precio">$ 80.000</p><p class="cats-cliente">Collares</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="aretes corazón diente de leon $ 20.000">
       <div class="foto"><img src="fotos/lv_0_20261105165906.jpg" loading="lazy" alt="Aretes corazón diente de leon"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20261105165906.jpg" alt=""></div>
-      <figcaption><h3>Aretes corazón diente de leon</h3><p class="precio">$ 20.000</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Aretes corazón diente de leon</h3><p class="precio">$ 20.000</p><p class="cats-cliente">Aretes</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Collares" data-buscar="collar trebol 4 hojas $ 25.000">
       <div class="foto"><img src="fotos/lv_0_20261105170008.jpg" loading="lazy" alt="Collar Trebol 4 hojas"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20261105170008.jpg" alt=""></div>
-      <figcaption><h3>Collar Trebol 4 hojas</h3><p class="precio">$ 25.000</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Collar Trebol 4 hojas</h3><p class="precio">$ 25.000</p><p class="cats-cliente">Collares</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Sets|Aretes|Collares" data-buscar="set bugambilia $ 40.000">
       <div class="foto"><img src="fotos/lv_0_20261105170329.jpg" loading="lazy" alt="Set Bugambilia"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20261105170329.jpg" alt=""></div>
-      <figcaption><h3>Set Bugambilia</h3><p class="precio">$ 40.000</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Set Bugambilia</h3><p class="precio">$ 40.000</p><p class="cats-cliente">Sets, Aretes, Collares</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="aretes colibri $ 25.000">
       <div class="foto"><img src="fotos/lv_0_20261105170558.jpg" loading="lazy" alt="Aretes colibri"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20261105170558.jpg" alt=""></div>
-      <figcaption><h3>Aretes colibri</h3><p class="precio">$ 25.000</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Aretes colibri</h3><p class="precio">$ 25.000</p><p class="cats-cliente">Aretes</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="aretes a presion hoja abutilon $ 25.000">
       <div class="foto"><img src="fotos/lv_0_20261105171048.jpg" loading="lazy" alt="Aretes a presion hoja abutilon"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20261105171048.jpg" alt=""></div>
-      <figcaption><h3>Aretes a presion hoja abutilon</h3><p class="precio">$ 25.000</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Aretes a presion hoja abutilon</h3><p class="precio">$ 25.000</p><p class="cats-cliente">Aretes</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Collares" data-buscar="collar margaritas grande $ 50.000">
       <div class="foto"><img src="fotos/lv_0_20261105171428.jpg" loading="lazy" alt="Collar margaritas grande"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20261105171428.jpg" alt=""></div>
-      <figcaption><h3>Collar margaritas grande</h3><p class="precio">$ 50.000</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Collar margaritas grande</h3><p class="precio">$ 50.000</p><p class="cats-cliente">Collares</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="topitos abutilon $ 18.000">
       <div class="foto"><img src="fotos/2025110718055986.jpg" loading="lazy" alt="Topitos abutilon"></div>
       <div class="galeria" hidden><img src="fotos/2025110718055986.jpg" alt=""><img src="fotos/IMG_20251107_171511.jpg" alt=""></div>
-      <figcaption><h3>Topitos abutilon</h3><p class="precio">$ 18.000</p></figcaption>
+      <figcaption><h3>Topitos abutilon</h3><p class="precio">$ 18.000</p><p class="cats-cliente">Aretes</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="topitos cuadrado silvestre $ 15.000">
       <div class="foto"><img src="fotos/lv_0_20251212160953.jpg" loading="lazy" alt="Topitos cuadrado silvestre"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20251212160953.jpg" alt=""><img src="fotos/lv_0_20251212160809.jpg" alt=""></div>
-      <figcaption><h3>Topitos cuadrado silvestre</h3><p class="precio">$ 15.000</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Topitos cuadrado silvestre</h3><p class="precio">$ 15.000</p><p class="cats-cliente">Aretes</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="topitos gota mini orquídea $ 20.000">
       <div class="foto"><img src="fotos/lv_0_20251212160734.jpg" loading="lazy" alt="Topitos gota mini orquídea"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20251212160734.jpg" alt=""></div>
-      <figcaption><h3>Topitos gota mini orquídea</h3><p class="precio">$ 20.000</p><p class="nota">2.5x2 cm</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Topitos gota mini orquídea</h3><p class="precio">$ 20.000</p><p class="nota">2.5x2 cm</p><p class="cats-cliente">Aretes</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="topitos mini $ 15.000">
       <div class="foto"><img src="fotos/IMG_20260110_161820.jpg" loading="lazy" alt="Topitos mini"></div>
       <div class="galeria" hidden><img src="fotos/IMG_20260110_161820.jpg" alt=""><img src="fotos/IMG_20260110_161829.jpg" alt=""><img src="fotos/lv_0_20251126133745.jpg" alt=""><img src="fotos/lv_0_20251126133807.jpg" alt=""></div>
-      <figcaption><h3>Topitos mini</h3><p class="precio">$ 15.000</p><p class="nota">1x1 cm</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+      <figcaption><h3>Topitos mini</h3><p class="precio">$ 15.000</p><p class="nota">1x1 cm</p><p class="cats-cliente">Aretes</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Sets|Aretes|Collares" data-buscar="set pensamientos $ 30.000">
       <div class="foto"><img src="fotos/lv_0_20251126133105.jpg" loading="lazy" alt="Set pensamientos"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20251126133105.jpg" alt=""></div>
-      <figcaption><h3>Set pensamientos</h3><p class="precio">$ 30.000</p><p class="nota">2.5x1.5 cm</p></figcaption>
+      <figcaption><h3>Set pensamientos</h3><p class="precio">$ 30.000</p><p class="nota">2.5x1.5 cm</p><p class="cats-cliente">Sets, Aretes, Collares</p></figcaption>
+    </figure>
+    <figure class="card con-fotos" data-cat="Aretes" data-buscar="topitos orquídea 2 (1.5x2.5) $ 17.000">
+      <div class="foto"><img src="fotos/57.jpg" loading="lazy" alt="Topitos orquídea 2 (1.5x2.5)"></div>
+      <div class="galeria" hidden><img src="fotos/57.jpg" alt=""></div>
+      <figcaption><h3>Topitos orquídea 2 (1.5x2.5)</h3><p class="precio">$ 17.000</p><p class="nota">1.5x2.5 cm</p><p class="cats-cliente">Aretes</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="topitos triángulo rojo $ 18.000">
       <div class="foto"><img src="fotos/lv_0_20251212161434.jpg" loading="lazy" alt="Topitos triángulo rojo"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20251212161434.jpg" alt=""><img src="fotos/lv_0_20251212161605.jpg" alt=""></div>
-      <figcaption><h3>Topitos triángulo rojo</h3><p class="precio">$ 18.000</p><p class="nota">2x2 cm</p></figcaption>
+      <figcaption><h3>Topitos triángulo rojo</h3><p class="precio">$ 18.000</p><p class="nota">2x2 cm</p><p class="cats-cliente">Aretes</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="Aretes" data-buscar="topitos triángulo verde $ 15.000">
       <div class="foto"><img src="fotos/lv_0_20251212160134.jpg" loading="lazy" alt="Topitos triángulo verde"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20251212160134.jpg" alt=""><img src="fotos/lv_0_20251212160205.jpg" alt=""></div>
-      <figcaption><h3>Topitos triángulo verde</h3><p class="precio">$ 15.000</p><p class="nota">1x1 cm</p></figcaption>
+      <figcaption><h3>Topitos triángulo verde</h3><p class="precio">$ 15.000</p><p class="nota">1x1 cm</p><p class="cats-cliente">Aretes</p></figcaption>
     </figure>
     <figure class="card con-fotos" data-cat="" data-buscar="triangulo margarita $ 30.000">
       <div class="foto"><img src="fotos/lv_0_20251212163049.jpg" loading="lazy" alt="Triangulo margarita"></div>
       <div class="galeria" hidden><img src="fotos/lv_0_20251212163049.jpg" alt=""></div>
       <figcaption><h3>Triangulo margarita</h3><p class="precio">$ 30.000</p><p class="entrega">Disponible para entrega inmediata</p></figcaption>
+    </figure>
+    <figure class="card con-fotos" data-cat="Aretes" data-buscar="aretes abutilon 15.000">
+      <div class="foto"><img src="fotos/abutilon_1.jpg" loading="lazy" alt="Aretes Abutilon"></div>
+      <div class="galeria" hidden><img src="fotos/abutilon_1.jpg" alt=""></div>
+      <figcaption><h3>Aretes Abutilon</h3><p class="precio">15.000</p><p class="cats-cliente">Aretes</p></figcaption>
     </figure>
   </main>
   <div class="visor" id="visor" role="dialog" aria-modal="true" aria-label="Vista ampliada">
@@ -323,6 +372,14 @@
     buscar.addEventListener('input', filtrar);
     document.getElementById('categoria').addEventListener('change', filtrar);
     filtrar();
+
+    // Orden alfabético por nombre
+    (function () {
+      const main = document.getElementById('catalogo');
+      const cards = [...main.querySelectorAll('.card')];
+      cards.sort((a, b) => a.querySelector('h3').textContent.localeCompare(b.querySelector('h3').textContent, 'es', { sensitivity: 'base' }));
+      cards.forEach(c => main.appendChild(c));
+    })();
 
     const visor = document.getElementById('visor');
     const visorImg = document.getElementById('visor-img');
